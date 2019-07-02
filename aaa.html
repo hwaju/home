@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Vue Props Sample</title>
+</head>
+<body>
+<div id="app">
+	<!-- 
+		Props[prɑ́ps]
+		모든 컴포넌트는 각 컴포넌트 자체의 스코프를 갖는다 (ex: 하위 컴포넌트가 상위 컴포넌트의 값을 바로 참조할 수 없는 형식)
+		상위에서 하위로 값을 전달하려면 props속성을 사용한다.
+		-->
+	<child-component v-bind:passed-data="message"></child-component>
+			<!-- props 명 = 상위 컴포넌트의 데이터 -->
+			<sibling-component v-bind:passed-message="anotherMessage"></sibling-component>
+
+</div>
+
+<script src="https://unpkg.com/vue@2.4.4/dist/vue.js"></script>
+<script>
+// 할일 #1
+// sibling-component 를 이름으로 갖는 새로운 컴포넌트를 아래에 등록해보세요.
+// options : template, props
+
+Vue.component('child-component', {
+	props: ['passedData'],
+	template: '<p>{{passedData}}</p>'
+});
+Vue.component('sibling-component', {
+	props: ['passedMessage'],
+	template: '<p>{{passedMessage}}</p>'
+});
+
+var app = new Vue({
+	el: '#app',
+	data: {
+			message: 'Hello Vue! passed from Parent Component',
+			// 할일 #2
+			// data 속성을 한개 더 지정하고 (예, anotherMessage) 임의의 문자열을 값으로 대입해보세요.
+			// 새로 지정한 data 속성을 위 sibling-component 에 props 로 전달합니다.
+			anotherMessage:'props 로 전달',
+	}
+});
+</script>
+</body>
+</html>
